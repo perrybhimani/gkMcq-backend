@@ -1,0 +1,114 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "IBM Plex Sans";
+  line-height: 1.5;
+  background-color: #0253A8;
+  padding: 0 2rem;
+}
+
+input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "IBM Plex Sans";
+  line-height: 1.5;
+  background-color: #0253A8;
+  padding: 0 2rem;
+}
+
+input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+}
+
+.card {
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 393px;
+  background-color: #0253A8;
+  border-radius: 10px;
+  padding: 0.75rem;
+  align-items: center
+}
+
+.card-form {
+  padding: 2rem 1rem 0;
+}
+
+.input {
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+  padding-top: 1.5rem;
+}
+.input + .input {
+  margin-top: 1.5rem;
+}
+
+.input-label {
+  color: #FFFFFF;
+  position: absolute;
+  top: 2rem;
+  left: 1rem;
+  transition: 0.25s ease;
+}
+
+.input-field {
+  background-color: transparent;
+  border: 1px solid #CDCDCD;
+  position: static;
+  color: #FFFFFF;
+  width: 343px;
+  height: 41px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 1.125rem;
+  align-items: center;
+  padding: 15px;
+}
+.input-field:focus, .input-field:valid {
+  outline: 0;
+}
+.input-field:focus + .input-label, .input-field:valid + .input-label {
+  color: #FFFFFF;
+  transform: translateY(-1.9rem);
+}
+
+.action {
+  margin-top: 2rem;
+}
+
+.action-button {
+  font: inherit;
+  font-size: 1rem;
+  padding: 1em;
+  width: 35%;
+  font-weight: 500;
+  background-color: #F79B2F;
+  border-radius: 88px;
+  color: #FFFFFF;
+  border: 0;
+}
+
+.action-button:hover { background-color: #c77e2b }
+
+.action-button:focus {
+  outline: 0;
+}

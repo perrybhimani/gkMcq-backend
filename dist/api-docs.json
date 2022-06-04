@@ -1,0 +1,2146 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "excerptlab",
+    "contact": {}
+  },
+  "host": "api.excerptlab.com",
+  "basePath": "/",
+  "securityDefinitions": {},
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/auth/adminLogin": {
+      "post": {
+        "summary": "admin login",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "adminlogin",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/adminloginrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/listUser": {
+      "get": {
+        "summary": "listUser",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "listUser",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/updateUser/{userId}": {
+      "put": {
+        "summary": "update user by admin",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "updateuserbyadmin",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateuserbyadminrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/deleteUser/{userId}": {
+      "delete": {
+        "summary": "deleteUser",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "deleteUser",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/createTopic": {
+      "post": {
+        "summary": "createTopic",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "createTopic",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createTopicRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/listTopics": {
+      "get": {
+        "summary": "listTopics",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "listTopics",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/updateTopic/{topicId}": {
+      "put": {
+        "summary": "updateTopic",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "updateTopic",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "topicId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateTopicRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/deleteTopic/{topicId}": {
+      "delete": {
+        "summary": "deleteTopic",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "deleteTopic",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "topicId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/createQuestion": {
+      "post": {
+        "summary": "createQuestion",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "createQuestion",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createQuestionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/listQuestions": {
+      "get": {
+        "summary": "listQuestions",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "listQuestions",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "topicId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/updateQuestion/{questionId}": {
+      "put": {
+        "summary": "updateQuestion",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "updateQuestion",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateQuestionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/deleteQuestion/{questionId}": {
+      "delete": {
+        "summary": "deleteQuestion",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "deleteQuestion",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/getQuestionById/{questionId}": {
+      "get": {
+        "summary": "getQuestionById",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "getQuestionById",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/deleteFeedback/{feedbackId}": {
+      "delete": {
+        "summary": "delete Feedback",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "deleteFeedback",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "feedbackId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/createHint": {
+      "post": {
+        "summary": "create hint",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "createhint",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createhintrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/updateHint/{hintId}": {
+      "put": {
+        "summary": "update hint",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "updatehint",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "hintId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updatehintrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/deleteHint/{hintId}": {
+      "delete": {
+        "summary": "delete hint",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "deletehint",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "hintId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/listHints": {
+      "get": {
+        "summary": "list hints",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "listhints",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/admin/uploadFile": {
+      "post": {
+        "summary": "upload files",
+        "tags": [
+          "admin"
+        ],
+        "operationId": "uploadfiles",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/signUp": {
+      "post": {
+        "summary": "signUp",
+        "tags": [
+          "user"
+        ],
+        "operationId": "signUp",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/signUpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "login",
+        "tags": [
+          "user"
+        ],
+        "operationId": "login",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/loginrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/updateUser/{userId}": {
+      "put": {
+        "summary": "updateUser",
+        "tags": [
+          "user"
+        ],
+        "operationId": "updateUser",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/submitQuestion": {
+      "post": {
+        "summary": "submitQuestion",
+        "tags": [
+          "user"
+        ],
+        "operationId": "submitQuestion",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/submitQuestionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/getProgress": {
+      "get": {
+        "summary": "getProgress",
+        "tags": [
+          "user"
+        ],
+        "operationId": "getProgress",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/getUserProfile": {
+      "get": {
+        "summary": "get user profile",
+        "tags": [
+          "user"
+        ],
+        "operationId": "getuserprofile",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/getLearningProgress": {
+      "get": {
+        "summary": "get Learning Progress",
+        "tags": [
+          "user"
+        ],
+        "operationId": "getLearningProgress",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "currentDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "timePeriod",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/changePassword": {
+      "put": {
+        "summary": "change password",
+        "tags": [
+          "user"
+        ],
+        "operationId": "changepassword",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/changepasswordrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/getDailyStreak": {
+      "get": {
+        "summary": "getDailyStreak",
+        "tags": [
+          "user"
+        ],
+        "operationId": "getDailyStreak",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "currentDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/submitFeedback": {
+      "post": {
+        "summary": "submit Feedback",
+        "tags": [
+          "user"
+        ],
+        "operationId": "submitFeedback",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/submitFeedbackRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/getLeaderBoardData": {
+      "get": {
+        "summary": "getLeaderBoardData",
+        "tags": [
+          "user"
+        ],
+        "operationId": "getLeaderBoardData",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "currentDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "timePeriod",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/getHintByQuestion/{questionId}": {
+      "get": {
+        "summary": "get Hint By Question Id",
+        "tags": [
+          "user"
+        ],
+        "operationId": "getHintByQuestionId",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/createNotification": {
+      "post": {
+        "summary": "create notification",
+        "tags": [
+          "user"
+        ],
+        "operationId": "createnotification",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createnotificationrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/listNotification": {
+      "get": {
+        "summary": "list notification",
+        "tags": [
+          "user"
+        ],
+        "operationId": "listnotification",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/deleteNotification/{notiId}": {
+      "delete": {
+        "summary": "delete notification",
+        "tags": [
+          "user"
+        ],
+        "operationId": "deletenotification",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "notiId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/saveFcmToken": {
+      "post": {
+        "summary": "save fcm token",
+        "tags": [
+          "user"
+        ],
+        "operationId": "savefcmtoken",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/savefcmtokenrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/getDiscussions": {
+      "get": {
+        "summary": "get disscussions",
+        "tags": [
+          "user"
+        ],
+        "operationId": "getdisscussions",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "questionId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/facebook": {
+      "get": {
+        "summary": "facebook",
+        "tags": [
+          "social login"
+        ],
+        "operationId": "facebook",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/facebookLogin": {
+      "get": {
+        "summary": "facebookLogin",
+        "tags": [
+          "social login"
+        ],
+        "operationId": "facebookLogin",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "summary": "google",
+        "tags": [
+          "social login"
+        ],
+        "operationId": "google",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/googleLogin": {
+      "get": {
+        "summary": "googleLogin",
+        "tags": [
+          "social login"
+        ],
+        "operationId": "googleLogin",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "adminloginrequest": {
+      "title": "adminloginrequest",
+      "example": {
+        "email": "admin@yopmail.com",
+        "password": "1234567890"
+      },
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "updateuserbyadminrequest": {
+      "title": "updateuserbyadminrequest",
+      "example": {
+        "name": "abcd",
+        "email": "abcd@yopmail.com"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email"
+      ]
+    },
+    "createTopicRequest": {
+      "title": "createTopicRequest",
+      "example": {
+        "name": "trumpet",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU",
+        "level": 6,
+        "rowNo": 6,
+        "position": "right",
+        "prompt": [
+          {
+            "type": "text",
+            "value": "hi"
+          },
+          {
+            "type": "image",
+            "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rowNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "position": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Prompt"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "image",
+        "level",
+        "rowNo",
+        "position",
+        "prompt"
+      ]
+    },
+    "Prompt": {
+      "title": "Prompt",
+      "example": {
+        "type": "text",
+        "value": "hi"
+      },
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "updateTopicRequest": {
+      "title": "updateTopicRequest",
+      "example": {
+        "name": "rhythm-1",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU",
+        "level": 2,
+        "rowNo": 6,
+        "position": "right",
+        "prompt": [
+          {
+            "type": "text",
+            "value": "hi"
+          },
+          {
+            "type": "image",
+            "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rowNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "position": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Prompt"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "image",
+        "level",
+        "rowNo",
+        "position",
+        "prompt"
+      ]
+    },
+    "createQuestionRequest": {
+      "title": "createQuestionRequest",
+      "example": {
+        "title": "What tempo marking best describes the excerpt you heard?",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU",
+        "audio": "https://www.google.com/",
+        "type": "MCQ",
+        "options": [
+          {
+            "option": "moderate",
+            "prompt": [
+              {
+                "type": "text",
+                "value": "hi"
+              },
+              {
+                "type": "image",
+                "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+              }
+            ],
+            "correctAnswer": false
+          },
+          {
+            "option": "allegro vivance",
+            "prompt": [
+              {
+                "type": "text",
+                "value": "hi"
+              },
+              {
+                "type": "image",
+                "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+              }
+            ],
+            "correctAnswer": false
+          },
+          {
+            "option": "andante",
+            "prompt": [
+              {
+                "type": "text",
+                "value": "hi"
+              },
+              {
+                "type": "image",
+                "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+              }
+            ],
+            "correctAnswer": false
+          },
+          {
+            "option": "allegro agetito",
+            "prompt": [
+              {
+                "type": "text",
+                "value": "hi"
+              },
+              {
+                "type": "image",
+                "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+              }
+            ],
+            "correctAnswer": true
+          }
+        ],
+        "musicName": "music",
+        "composerName": "composer",
+        "topicId": "61fa1aabf65f741f0b6c8a95"
+      },
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "audio": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Option"
+          }
+        },
+        "musicName": {
+          "type": "string"
+        },
+        "composerName": {
+          "type": "string"
+        },
+        "topicId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "image",
+        "audio",
+        "type",
+        "options",
+        "musicName",
+        "composerName",
+        "topicId"
+      ]
+    },
+    "Option": {
+      "title": "Option",
+      "example": {
+        "option": "moderate",
+        "prompt": [
+          {
+            "type": "text",
+            "value": "hi"
+          },
+          {
+            "type": "image",
+            "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+          }
+        ],
+        "correctAnswer": false
+      },
+      "type": "object",
+      "properties": {
+        "option": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Prompt"
+          }
+        },
+        "correctAnswer": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "option",
+        "prompt",
+        "correctAnswer"
+      ]
+    },
+    "updateQuestionRequest": {
+      "title": "updateQuestionRequest",
+      "example": {
+        "title": "What tempo marking best describes the excerpt you heard?",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU",
+        "audio": "https://www.google.com/",
+        "type": "MCQ",
+        "options": [
+          {
+            "option": "moderate",
+            "prompt": [
+              {
+                "type": "text",
+                "value": "hi"
+              },
+              {
+                "type": "image",
+                "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+              }
+            ],
+            "correctAnswer": false
+          },
+          {
+            "option": "allegro vivance",
+            "prompt": [
+              {
+                "type": "text",
+                "value": "hi"
+              },
+              {
+                "type": "image",
+                "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+              }
+            ],
+            "correctAnswer": false
+          },
+          {
+            "option": "andante",
+            "prompt": [
+              {
+                "type": "text",
+                "value": "hi"
+              },
+              {
+                "type": "image",
+                "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+              }
+            ],
+            "correctAnswer": false
+          },
+          {
+            "option": "allegro agetito",
+            "prompt": [
+              {
+                "type": "text",
+                "value": "hi"
+              },
+              {
+                "type": "image",
+                "value": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN7aJrHpL7AqLN7y9V83wSVRZUaPK2h1u8A&usqp=CAU"
+              }
+            ],
+            "correctAnswer": true
+          }
+        ],
+        "musicName": "music",
+        "composerName": "composer",
+        "topicId": "61fa1a67f65f741f0b6c8a92"
+      },
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "audio": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Option"
+          }
+        },
+        "musicName": {
+          "type": "string"
+        },
+        "composerName": {
+          "type": "string"
+        },
+        "topicId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "image",
+        "audio",
+        "type",
+        "options",
+        "musicName",
+        "composerName",
+        "topicId"
+      ]
+    },
+    "createhintrequest": {
+      "title": "createhintrequest",
+      "example": {
+        "hintInfo": {
+          "text": "hint info",
+          "audio": "https://www.google.com/",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+        },
+        "questionInfo": {
+          "text": "ques info",
+          "audio": "https://www.google.com/",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+        },
+        "promptInfo": {
+          "text": "prompt info",
+          "audio": "https://www.google.com/",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+        },
+        "questionId": "61fb797bca3d6a1890f7accc"
+      },
+      "type": "object",
+      "properties": {
+        "hintInfo": {
+          "$ref": "#/definitions/HintInfo"
+        },
+        "questionInfo": {
+          "$ref": "#/definitions/QuestionInfo"
+        },
+        "promptInfo": {
+          "$ref": "#/definitions/PromptInfo"
+        },
+        "questionId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "hintInfo",
+        "questionInfo",
+        "promptInfo",
+        "questionId"
+      ]
+    },
+    "HintInfo": {
+      "title": "HintInfo",
+      "example": {
+        "text": "hint info",
+        "audio": "https://www.google.com/",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+      },
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "audio": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "audio",
+        "image"
+      ]
+    },
+    "QuestionInfo": {
+      "title": "QuestionInfo",
+      "example": {
+        "text": "ques info",
+        "audio": "https://www.google.com/",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+      },
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "audio": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "audio",
+        "image"
+      ]
+    },
+    "PromptInfo": {
+      "title": "PromptInfo",
+      "example": {
+        "text": "prompt info",
+        "audio": "https://www.google.com/",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+      },
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "audio": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "audio",
+        "image"
+      ]
+    },
+    "updatehintrequest": {
+      "title": "updatehintrequest",
+      "example": {
+        "hintInfo": {
+          "text": "hint info",
+          "audio": "https://www.google.com/",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+        },
+        "questionInfo": {
+          "text": "ques info",
+          "audio": "https://www.google.com/",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+        },
+        "promptInfo": {
+          "text": "prompt info",
+          "audio": "https://www.google.com/",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNKEG0hUkqhBjolBZ1YAoMcoSjlZBJ9e_ggbY4WiSa5dCEPKJtHiyZjcGp3h8QC2LY4w&usqp=CAU"
+        },
+        "questionId": "61fb797bca3d6a1890f7accc"
+      },
+      "type": "object",
+      "properties": {
+        "hintInfo": {
+          "$ref": "#/definitions/HintInfo"
+        },
+        "questionInfo": {
+          "$ref": "#/definitions/QuestionInfo"
+        },
+        "promptInfo": {
+          "$ref": "#/definitions/PromptInfo"
+        },
+        "questionId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "hintInfo",
+        "questionInfo",
+        "promptInfo",
+        "questionId"
+      ]
+    },
+    "signUpRequest": {
+      "title": "signUpRequest",
+      "example": {
+        "name": "abc",
+        "email": "abc@yopmail.com",
+        "password": "123456789"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "password"
+      ]
+    },
+    "loginrequest": {
+      "title": "loginrequest",
+      "example": {
+        "email": "abc@yopmail.com",
+        "password": "123456789"
+      },
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "updateUserRequest": {
+      "title": "updateUserRequest",
+      "example": {
+        "name": "xyz",
+        "email": "xyz@yopmail.com"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email"
+      ]
+    },
+    "submitQuestionRequest": {
+      "title": "submitQuestionRequest",
+      "example": {
+        "topicId": "61fa1aabf65f741f0b6c8a95",
+        "questionId": "62035c10307021288d59e42e",
+        "submittedAnswer": "allegro agetito",
+        "submitDate": "2022-02-08T06:36:37.902Z"
+      },
+      "type": "object",
+      "properties": {
+        "topicId": {
+          "type": "string"
+        },
+        "questionId": {
+          "type": "string"
+        },
+        "submittedAnswer": {
+          "type": "string"
+        },
+        "submitDate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "topicId",
+        "questionId",
+        "submittedAnswer",
+        "submitDate"
+      ]
+    },
+    "changepasswordrequest": {
+      "title": "changepasswordrequest",
+      "example": {
+        "currentPassword": "123456789",
+        "newPassword": "123456789"
+      },
+      "type": "object",
+      "properties": {
+        "currentPassword": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "currentPassword",
+        "newPassword"
+      ]
+    },
+    "submitFeedbackRequest": {
+      "title": "submitFeedbackRequest",
+      "example": {
+        "comment": "music app1",
+        "questionId": "622ed17f6d06502821cca315"
+      },
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "questionId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "comment",
+        "questionId"
+      ]
+    },
+    "createnotificationrequest": {
+      "title": "createnotificationrequest",
+      "example": {
+        "receiverId": "61f8f34edcecc51e2466e6d9",
+        "message": "notification created"
+      },
+      "type": "object",
+      "properties": {
+        "receiverId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "receiverId",
+        "message"
+      ]
+    },
+    "savefcmtokenrequest": {
+      "title": "savefcmtokenrequest",
+      "example": {
+        "fcmToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjA5ZjEyNjBiNDZlOTJjM2Y5ZjgzMmQiLCJlbWFpbCI6ImFkbWluQHlvcG1haWwuY29tIiwiaWF0IjoxNjQ0ODI0Mzk4LCJleHAiOjE2NzYzNjAzOTh9.-DrqxPLM2FaMnYyd4b83Xwjc4bRAHrVtxEIJB8G0SrM"
+      },
+      "type": "object",
+      "properties": {
+        "fcmToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "fcmToken"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "admin"
+    },
+    {
+      "name": "user"
+    },
+    {
+      "name": "social login"
+    }
+  ]
+}

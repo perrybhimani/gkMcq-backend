@@ -1,0 +1,24 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' type="text/css" href='/stylesheets/style.css')
+    title Reset Password
+  body
+  .card
+    form.card-form(action=link method='post')
+      .input
+        input.input-field(type='email' name='email' required='')
+        label.input-label Email
+
+      .input
+        input.input-field(type='password' name='password' required='')
+        label.input-label Password
+
+      .input
+        input.input-field(type='password' name='confirmPassword' required='')
+        label.input-label Confirm Password
+
+      .action
+        button.action-button(type='submit') Submit
