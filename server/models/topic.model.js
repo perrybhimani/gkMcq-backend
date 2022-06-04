@@ -1,16 +1,16 @@
 import mongoose, { Schema } from 'mongoose';
 
-const promptSchema = new Schema(
-  {
-    type: {
-      type: String,
-      enum: ['text', 'image', 'audio']
-    },
-    value: {
-      type: String
-    }
-  }
-)
+// const promptSchema = new Schema(
+//   {
+//     type: {
+//       type: String,
+//       enum: ['text', 'image', 'audio']
+//     },
+//     value: {
+//       type: String
+//     }
+//   }
+// )
 
 const topicSchema = new Schema(
   {
@@ -34,7 +34,7 @@ const topicSchema = new Schema(
       enum: ['right', 'left', 'center'],
       default: 'center'
     },
-    prompt: [promptSchema],
+    // prompt: [promptSchema],
     totalQuestion: {
       type: Number,
       default: 0
