@@ -41,9 +41,9 @@ const questionSchema = new Schema(
     image: {
       type: String,
     },
-    // audio: {
-    //   type: String,
-    // },
+    audio: {
+      type: String,
+    },
     answer: [{
       type: String,
     }],
