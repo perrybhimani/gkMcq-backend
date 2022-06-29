@@ -282,17 +282,22 @@ async function getLeaderBoardData(req, res, next) {
       { $match: { submitDate: { $gte: new Date(startDate), $lte: new Date(endDate) }}},
       { $lookup: { from: 'topic', localField: 'topicId', foreignField: '_id', as: 'topic' }},
       { $project: { topicId: 1, userId: 1, submitDate: { $dateToString: { format: "%Y-%m-%d", date: "$submitDate" } },
-        totalQuestion: { $arrayElemAt: [ "$topic.totalQuestion", 0 ]} }},
-      { $group: { _id: { topicId: '$topicId', userId: '$userId'}, count: { $count: { } }, totalQuestion: { $max:"$totalQuestion" } }},
-      { $project: { _id: 0, topicId: '$_id.topicId', userId: '$_id.userId', count: 1, totalQuestion: 1, completeTopic: { $eq: ['$totalQuestion', '$count']}  }},
+        totalQuestion: { $arrayElemAt: [ "$topic.totalQuestion", 0 ]}, topicLevel: { $arrayElemAt: [ "$topic.level", 0 ]} }},
+      { $group: { _id: { topicId: '$topicId', userId: '$userId'}, count: { $count: { } }, totalQuestion: { $max:"$totalQuestion" }, topicLevel: { $first: '$topicLevel'} }},
+      { $project: { _id: 0, topicId: '$_id.topicId', userId: '$_id.userId', count: 1, totalQuestion: 1, completeTopic: { $eq: ['$totalQuestion', '$count']}, topicLevel: 1  }},
       { $match: { completeTopic: { $eq: true }}},
-      { $group: { _id: { userId: '$userId' }, completeTopic: { $count: { }} }},
-      { $project: { _id: 0, userId: '$_id.userId', completeTopic: 1 }},
+      { $group: { _id: { userId: '$userId' }, completeTopic: { $count: { }}, level: { $max: '$topicLevel'} }},
+      { $project: { _id: 0, userId: '$_id.userId', completeTopic: 1, level: 1 }},
       { $lookup: { from: 'users', localField: 'userId', foreignField: '_id', as: 'user'}},
-      { $project: { userId: 1, completeTopic: 1, userName: { $arrayElemAt: [ "$user.name", 0 ]}, profilePicture: { $arrayElemAt: [ "$user.profilePicture", 0 ] } }}
+      { $project: { userId: 1, completeTopic: 1, userName: { $arrayElemAt: [ "$user.name", 0 ]}, profilePicture: { $arrayElemAt: [ "$user.profilePicture", 0 ] }, level: 1 }}
     ])
 
     let totalTopics = await topic.find().countDocuments();
+
+    let index = data.findIndex(e => e.userId.toString() === req.user._id.toString());
+    if(index < 0) {
+      data.push({ completeTopic: 0, level: 0, userId: req.user._id, userName: req.user.name, profilePicture: req.user.profilePicture ? req.user.profilePicture : undefined })
+    }
 
     data.map(e => {
       e.totalTopics = totalTopics;
@@ -302,6 +307,7 @@ async function getLeaderBoardData(req, res, next) {
       }
     })
 
+    data = data.filter(e => e.userName && e.userId);
     next(data)
   } catch (err) {
     console.log(err);
