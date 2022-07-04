@@ -22,7 +22,7 @@ function authorizeUser(req, res, next) {
 //update user
 async function updateUser(req, res, next) {
   try {
-    let { name, email, pauseNotification, profilePicture } = req.body;
+    let { name, email, pauseNotification, profilePicture, enableNotification } = req.body;
     let _id = req.params.userId;
     if(email) email = email.toLowerCase();
 
@@ -34,7 +34,7 @@ async function updateUser(req, res, next) {
     if(name) updateValue.name = name;
     if(email) updateValue.email = email;
     if(profilePicture) updateValue.profilePicture = profilePicture;
-    // if(pauseNotification === true || pauseNotification === false) updateValue.pauseNotification = pauseNotification;
+    if(enableNotification === true || enableNotification === false) updateValue.enableNotification = enableNotification;
 
     await user.updateOne({ _id }, updateValue);
 
@@ -110,7 +110,7 @@ async function getUserProfile(req, res, next) {
   try {
     let userDetails = await user.aggregate([
       { $match: { _id: req.user._id }},
-      { $project: { name: 1, email: 1, userProgress: 1 }},
+      { $project: { name: 1, email: 1, enableNotification: 1, userProgress: 1 }},
       { $unwind: '$userProgress'},
       { $facet: { 
         ongoingTopics:[{ $match: { $and: [{'userProgress.progress': { $gt : 0 }}, {'userProgress.progress': { $lt: 100 }} ] }}],
@@ -120,12 +120,12 @@ async function getUserProfile(req, res, next) {
         { $cond: [ { $gt : [{ "$size": "$ongoingTopics" }, 0] }, '$ongoingTopics', '$topics' ]},
         ongoing: { $cond: [ { $gt : [{ "$size": "$ongoingTopics" }, 0] }, true, false ]} } },
       { $unwind: '$userProgress'},
-      { $project: { _id: '$userProgress._id', name: '$userProgress.name', email: '$userProgress.email', userProgress: '$userProgress.userProgress', ongoing: '$ongoing' }},
+      { $project: { _id: '$userProgress._id', name: '$userProgress.name', email: '$userProgress.email', enableNotification: '$userProgress.enableNotification', userProgress: '$userProgress.userProgress', ongoing: '$ongoing' }},
       { $lookup: { from: 'topic', localField: 'userProgress.topicId', foreignField: '_id', as: 'topic' }},
-      { $project: { name: 1, email: 1, userProgress : { topicName: { $arrayElemAt: [ "$topic.name", 0 ]}, 
+      { $project: { name: 1, email: 1, enableNotification: 1, userProgress : { topicName: { $arrayElemAt: [ "$topic.name", 0 ]}, 
         topicImage: { $arrayElemAt: [ "$topic.image", 0 ]}, progress: '$userProgress.progress', topicId: '$userProgress.topicId'}, ongoing: 1 }},
-      { $group: { _id: { name: '$name', email: '$email', _id: '$_id', ongoing: '$ongoing'}, userProgress: { $push: '$userProgress' }}},
-      { $project: { _id: '$_id._id', name: "$_id.name", email: "$_id.email", userProgress: 1, ongoing: "$_id.ongoing" }}
+      { $group: { _id: { name: '$name', email: '$email', enableNotification: '$enableNotification', _id: '$_id', ongoing: '$ongoing'}, userProgress: { $push: '$userProgress' }}},
+      { $project: { _id: '$_id._id', name: "$_id.name", email: "$_id.email", enableNotification: '$_id.enableNotification', userProgress: 1, ongoing: "$_id.ongoing" }}
     ])
 
     userDetails = userDetails.length > 0 ? userDetails[0] : {};
