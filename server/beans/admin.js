@@ -68,12 +68,12 @@ async function updateUserByAdmin(req, res, next) {
 //create topic by admin according to level
 async function createTopic(req, res, next) {
   try {
-    let { name, image, level, levelName, rowNo, position, prompt } = req.body;
+    let { name, image, level, levelName, rowNo, position, prompt, section } = req.body;
 
     let findTopic = await topic.findOne({ name, level });
     if(findTopic) return next(new APIError('the topic is already present in respective level', httpStatus.BAD_REQUEST, true));
 
-    let findPosition = await topic.findOne({ level, rowNo, position });
+    let findPosition = await topic.findOne({ level, rowNo, position, section });
     if(findPosition) return next(new APIError('change the position of respective topic', httpStatus.BAD_REQUEST, true));
 
     let addTopic = await topic.create({
@@ -83,7 +83,8 @@ async function createTopic(req, res, next) {
       levelName,
       rowNo,
       position,
-      prompt
+      prompt,
+      section
     })
 
     //updating userProgress array
@@ -110,7 +111,7 @@ async function listTopics(req, res, next) {
 //update topic by admin 
 async function updateTopic(req, res, next) {
   try {
-    let { name, image, level, levelName, rowNo, position, prompt } = req.body;
+    let { name, image, level, levelName, rowNo, position, prompt, section } = req.body;
     let _id = req.params.topicId;
 
     let findTopic = await topic.findOne({ _id });
@@ -119,7 +120,7 @@ async function updateTopic(req, res, next) {
     let searchTopic = await topic.findOne({ _id: { $ne: _id }, name, level });
     if(searchTopic) return next(new APIError('the topic is already present in respective level', httpStatus.BAD_REQUEST, true));
 
-    let searchPosition = await topic.findOne({ _id: { $ne: _id }, level, rowNo, position });
+    let searchPosition = await topic.findOne({ _id: { $ne: _id }, level, rowNo, position, section });
     if(searchPosition) return next(new APIError('change the position of respective topic', httpStatus.BAD_REQUEST, true));
 
     let updateValue = {};
@@ -130,6 +131,7 @@ async function updateTopic(req, res, next) {
     if(rowNo) updateValue.rowNo = rowNo;
     if(position) updateValue.position = position;
     if(prompt) updateValue.prompt = prompt;
+    if(section) updateValue.section = section;
 
     await topic.updateOne({ _id }, updateValue);
 

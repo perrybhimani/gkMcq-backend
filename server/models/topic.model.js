@@ -29,6 +29,10 @@ const topicSchema = new Schema(
     rowNo: {
       type: Number
     },
+    section: {
+      type: String,
+      enum: ['Kids', 'Adult']
+    },
     position: {
       type: String,
       enum: ['right', 'left', 'center'],

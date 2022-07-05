@@ -16,6 +16,7 @@ const adminParams = {
       level: Joi.number().required(),
       levelName: Joi.string(),
       rowNo: Joi.number(),
+      section: Joi.string().valid('Kids', 'Adult').required(),
       position: Joi.string().valid('right', 'left', 'center'),
       prompt: Joi.array().items({
         text: Joi.string().valid('text', 'image', 'audio'),
@@ -36,6 +37,7 @@ const adminParams = {
       levelName: Joi.string(),
       rowNo: Joi.number(),
       position: Joi.string().valid('right', 'left', 'center'),
+      section: Joi.string().valid('Kids', 'Adult'),
       prompt: Joi.array().items({
         text: Joi.string().valid('text', 'image', 'audio'),
         value: Joi.string()
