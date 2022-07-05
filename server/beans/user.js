@@ -22,7 +22,7 @@ function authorizeUser(req, res, next) {
 //update user
 async function updateUser(req, res, next) {
   try {
-    let { name, email, pauseNotification, profilePicture, enableNotification } = req.body;
+    let { name, email, profilePicture, enableNotification } = req.body;
     let _id = req.params.userId;
     if(email) email = email.toLowerCase();
 
@@ -88,9 +88,21 @@ async function getProgress(req, res, next) {
       { $project: { userProgress: 1 }},
       { $unwind: '$userProgress'},
       { $lookup: { from: 'topic', localField: 'userProgress.topicId', foreignField: '_id', as: 'topic' }},
-      { $project: { userProgress: { progress: 1, topicId: 1, topicName: { $arrayElemAt: [ "$topic.name", 0 ]}, topicImage: { $arrayElemAt: [ "$topic.image", 0 ]}, topicLevelName: { $arrayElemAt: [ "$topic.levelName", 0 ]},
-        topicLevel: { $arrayElemAt: [ "$topic.level", 0 ]}, topicRowNo: { $arrayElemAt: [ "$topic.rowNo", 0 ]}, topicPosition: { $arrayElemAt: [ "$topic.position", 0 ]}, totalQuestion: { $arrayElemAt: [ "$topic.totalQuestion", 0 ]} }}},
-      { $group: { _id: { topicLevel: '$userProgress.topicLevel', topicRowNo: '$userProgress.topicRowNo'}, userProgress: { $push: '$userProgress' }, topicLevelName: { $max: "$userProgress.topicLevelName" }}},
+      {
+        $project: {
+          userProgress: {
+            progress: 1, topicId: 1, topicName: { $arrayElemAt: ["$topic.name", 0] }, topicImage: { $arrayElemAt: ["$topic.image", 0] },
+            topicLevelName: { $arrayElemAt: ["$topic.levelName", 0] }, topicLevel: { $arrayElemAt: ["$topic.level", 0] }, topicRowNo: { $arrayElemAt: ["$topic.rowNo", 0] },
+            topicPosition: { $arrayElemAt: ["$topic.position", 0] }, totalQuestion: { $arrayElemAt: ["$topic.totalQuestion", 0] }
+          }
+        }
+      },
+      {
+        $group: {
+          _id: { topicLevel: '$userProgress.topicLevel', topicRowNo: '$userProgress.topicRowNo' }, userProgress: { $push: '$userProgress' },
+          topicLevelName: { $max: "$userProgress.topicLevelName" }
+        }
+      },
       { $project: { _id: 0, topicLevel: '$_id.topicLevel', topicRowNo: '$_id.topicRowNo', userProgress: '$userProgress', topicLevelName: '$topicLevelName' }},
       { $sort: { topicRowNo: 1 }},
       { $group: { _id: { topicLevel: '$topicLevel' }, topicLevelName: { $max: "$topicLevelName" }, userProgress: { $push: '$userProgress' }}},
@@ -110,7 +122,7 @@ async function getUserProfile(req, res, next) {
   try {
     let userDetails = await user.aggregate([
       { $match: { _id: req.user._id }},
-      { $project: { name: 1, email: 1, enableNotification: 1, userProgress: 1 }},
+      { $project: { name: 1, email: 1, enableNotification: 1, profilePicture: 1, userProgress: 1 }},
       { $unwind: '$userProgress'},
       { $facet: { 
         ongoingTopics:[{ $match: { $and: [{'userProgress.progress': { $gt : 0 }}, {'userProgress.progress': { $lt: 100 }} ] }}],
@@ -120,12 +132,27 @@ async function getUserProfile(req, res, next) {
         { $cond: [ { $gt : [{ "$size": "$ongoingTopics" }, 0] }, '$ongoingTopics', '$topics' ]},
         ongoing: { $cond: [ { $gt : [{ "$size": "$ongoingTopics" }, 0] }, true, false ]} } },
       { $unwind: '$userProgress'},
-      { $project: { _id: '$userProgress._id', name: '$userProgress.name', email: '$userProgress.email', enableNotification: '$userProgress.enableNotification', userProgress: '$userProgress.userProgress', ongoing: '$ongoing' }},
+      {
+        $project: {
+          _id: '$userProgress._id', name: '$userProgress.name', email: '$userProgress.email', enableNotification: '$userProgress.enableNotification',
+          profilePicture: '$userProgress.profilePicture', userProgress: '$userProgress.userProgress', ongoing: '$ongoing'
+        }
+      },
       { $lookup: { from: 'topic', localField: 'userProgress.topicId', foreignField: '_id', as: 'topic' }},
-      { $project: { name: 1, email: 1, enableNotification: 1, userProgress : { topicName: { $arrayElemAt: [ "$topic.name", 0 ]}, 
+      { $project: { name: 1, email: 1, enableNotification: 1, userProgress : { topicName: { $arrayElemAt: [ "$topic.name", 0 ]}, profilePicture: 1,
         topicImage: { $arrayElemAt: [ "$topic.image", 0 ]}, progress: '$userProgress.progress', topicId: '$userProgress.topicId'}, ongoing: 1 }},
-      { $group: { _id: { name: '$name', email: '$email', enableNotification: '$enableNotification', _id: '$_id', ongoing: '$ongoing'}, userProgress: { $push: '$userProgress' }}},
-      { $project: { _id: '$_id._id', name: "$_id.name", email: "$_id.email", enableNotification: '$_id.enableNotification', userProgress: 1, ongoing: "$_id.ongoing" }}
+      {
+        $group: {
+          _id: { name: '$name', email: '$email', enableNotification: '$enableNotification', profilePicture: '$profilePicture', _id: '$_id', ongoing: '$ongoing' },
+          userProgress: { $push: '$userProgress' }
+        }
+      },
+      {
+        $project: {
+          _id: '$_id._id', name: "$_id.name", email: "$_id.email", enableNotification: '$_id.enableNotification',
+          profilePicture: '$_id.profilePicture', userProgress: 1, ongoing: "$_id.ongoing"
+        }
+      }
     ])
 
     userDetails = userDetails.length > 0 ? userDetails[0] : {};
