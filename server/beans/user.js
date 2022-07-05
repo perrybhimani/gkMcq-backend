@@ -6,9 +6,9 @@ import submittedQues from '../models/submitQuestions.model';
 import moment from 'moment';
 import bcrypt from "bcrypt";
 import { salt } from '../../bin/www';
-import discuss from '../models/feedback.model';
-import hint from '../models/hint.model';
-import notification from '../models/notification.model';
+// import discuss from '../models/feedback.model';
+// import hint from '../models/hint.model';
+// import notification from '../models/notification.model';
 import mongoose from 'mongoose';
 import question from '../models/question.model';
 
@@ -34,7 +34,7 @@ async function updateUser(req, res, next) {
     if(name) updateValue.name = name;
     if(email) updateValue.email = email;
     if(profilePicture) updateValue.profilePicture = profilePicture;
-    if(pauseNotification === true || pauseNotification === false) updateValue.pauseNotification = pauseNotification;
+    // if(pauseNotification === true || pauseNotification === false) updateValue.pauseNotification = pauseNotification;
 
     await user.updateOne({ _id }, updateValue);
 
@@ -310,100 +310,100 @@ async function getLeaderBoardData(req, res, next) {
 }
 
 //get hint by question id by user
-async function getHintByQuestion(req, res, next) {
-  try {
-    let questionId = req.params.questionId;
+// async function getHintByQuestion(req, res, next) {
+//   try {
+//     let questionId = req.params.questionId;
 
-    let findHint = await hint.findOne({ questionId });
-    if(!findHint) return next(new APIError('No hint found for respective question!', httpStatus.BAD_REQUEST, true));
+//     let findHint = await hint.findOne({ questionId });
+//     if(!findHint) return next(new APIError('No hint found for respective question!', httpStatus.BAD_REQUEST, true));
 
-    next(findHint)
-  } catch (err) {
-    console.log(err);
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next(findHint)
+//   } catch (err) {
+//     console.log(err);
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //create notification
-async function createNotification(req, res, next) {
-  try {
-    let { receiverId, message } = req.body;
+// async function createNotification(req, res, next) {
+//   try {
+//     let { receiverId, message } = req.body;
 
-    await notification.create({
-      senderId: req.user._id,
-      receiverId,
-      message
-    })
+//     await notification.create({
+//       senderId: req.user._id,
+//       receiverId,
+//       message
+//     })
 
-    next('notification created successfully!')
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next('notification created successfully!')
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //list notification to user
-async function listNotification(req, res, next) {
-  try {
-    let listNoti = await notification
-    .find({ receiverId: req.user._id })
-    .select('message createdAt')
-    .sort({ createdAt: -1 });
+// async function listNotification(req, res, next) {
+//   try {
+//     let listNoti = await notification
+//     .find({ receiverId: req.user._id })
+//     .select('message createdAt')
+//     .sort({ createdAt: -1 });
 
-    listNoti = listNoti.map(e => ({ _id: e._id, message: e.message, createdAt: moment(e.createdAt).fromNow() }));
+//     listNoti = listNoti.map(e => ({ _id: e._id, message: e.message, createdAt: moment(e.createdAt).fromNow() }));
 
-    next(listNoti)
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next(listNoti)
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //delete notification by user
-async function deleteNotification(req, res, next) {
-  try {
-    let _id = req.params.notiId;
+// async function deleteNotification(req, res, next) {
+//   try {
+//     let _id = req.params.notiId;
 
-    let findNoti = await notification.findOne({ _id });
-    if(!findNoti) return next(new APIError('Invalid notification id!', httpStatus.BAD_REQUEST, true));
+//     let findNoti = await notification.findOne({ _id });
+//     if(!findNoti) return next(new APIError('Invalid notification id!', httpStatus.BAD_REQUEST, true));
 
-    await notification.deleteOne({ _id });
+//     await notification.deleteOne({ _id });
 
-    next('notification deleted successfully!')
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next('notification deleted successfully!')
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //save fcm token
-async function saveFcmToken(req, res, next) {
-  try {
-    let { fcmToken } = req.body;
+// async function saveFcmToken(req, res, next) {
+//   try {
+//     let { fcmToken } = req.body;
 
-    await user.updateOne({ _id: req.user._id }, { $addToSet: { notificationToken : fcmToken}});
+//     await user.updateOne({ _id: req.user._id }, { $addToSet: { notificationToken : fcmToken}});
 
-    next('fcm token added successfully')
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next('fcm token added successfully')
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 /**
  * get discussion list form questionId
  */
-async function getDiscussions(req, res, next) {
-  try {
-    let { questionId } = req.query;
+// async function getDiscussions(req, res, next) {
+//   try {
+//     let { questionId } = req.query;
 
-    let discussions = await discuss.aggregate([
-      { $match: { questionId: mongoose.Types.ObjectId(questionId) }},
-      { $lookup: { from: 'users', localField: 'userId', foreignField: '_id', as: 'user' }},
-      { $project: { comment: 1, createdAt: 1, userName: { $arrayElemAt: [ "$user.name", 0 ]} }}
-    ])
+//     let discussions = await discuss.aggregate([
+//       { $match: { questionId: mongoose.Types.ObjectId(questionId) }},
+//       { $lookup: { from: 'users', localField: 'userId', foreignField: '_id', as: 'user' }},
+//       { $project: { comment: 1, createdAt: 1, userName: { $arrayElemAt: [ "$user.name", 0 ]} }}
+//     ])
 
-    next({ discussions, totalDiscuss: discussions.length })
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next({ discussions, totalDiscuss: discussions.length })
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 /**
  * list Question by user
@@ -430,6 +430,20 @@ async function getQuestionList(req, res, next) {
   }
 }
 
+/**
+ * get level list by user
+ */
+async function getLevelList(req, res, next) {
+  try {
+    let levelList = await topic.find().select('-_id level');
+    console.log(levelList)
+    next()
+  } catch (err) {
+    console.log(err)
+    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+  }
+}
+
 module.exports = {
   authorizeUser,
   updateUser,
@@ -441,11 +455,12 @@ module.exports = {
   getDailyStreak,
   submitFeedback,
   getLeaderBoardData,
-  getHintByQuestion,
-  createNotification,
-  listNotification,
-  deleteNotification,
-  saveFcmToken,
-  getDiscussions,
-  getQuestionList
+  // getHintByQuestion,
+  // createNotification,
+  // listNotification,
+  // deleteNotification,
+  // saveFcmToken,
+  // getDiscussions,
+  getQuestionList,
+  getLevelList
 }

@@ -83,40 +83,40 @@ router
   /** GET admin/getQuestionById/:questionId - get question by id by admin */
   .get(validate(adminParams.getQuestionById), admin.getQuestionById)
 
-router
-  .route('/deleteFeedback/:feedbackId')
-  /** authorize admin user */
-  .all(authorizeAdmin)
-  /** DELETE admin/deleteFeedback - delete feedback by admin */
-  .delete(validate(adminParams.deleteFeedback), admin.deleteFeedback)
+// router
+//   .route('/deleteFeedback/:feedbackId')
+//   /** authorize admin user */
+//   .all(authorizeAdmin)
+//   /** DELETE admin/deleteFeedback - delete feedback by admin */
+//   .delete(validate(adminParams.deleteFeedback), admin.deleteFeedback)
 
-router
-  .route('/createHint')
-  /** authorize admin user */
-  .all(authorizeAdmin)
-  /** POST admin/createHint - create hint by admin */
-  .post(validate(adminParams.createHint), admin.createHint)
+// router
+//   .route('/createHint')
+//   /** authorize admin user */
+//   .all(authorizeAdmin)
+//   /** POST admin/createHint - create hint by admin */
+//   .post(validate(adminParams.createHint), admin.createHint)
 
-router
-  .route('/updateHint/:hintId')
-  /** authorize admin user */
-  .all(authorizeAdmin)
-  /** PUT admin/updateHint - update hint by admin */
-  .put(validate(adminParams.updateHint), admin.updateHint)
+// router
+//   .route('/updateHint/:hintId')
+//   /** authorize admin user */
+//   .all(authorizeAdmin)
+//   /** PUT admin/updateHint - update hint by admin */
+//   .put(validate(adminParams.updateHint), admin.updateHint)
 
-router
-  .route('/deleteHint/:hintId')
-  /** authorize admin user */
-  .all(authorizeAdmin)
-  /** DELETE admin/deleteHint - delete hint by admin */
-  .delete(validate(adminParams.deleteHint), admin.deleteHint)
+// router
+//   .route('/deleteHint/:hintId')
+//   /** authorize admin user */
+//   .all(authorizeAdmin)
+//   /** DELETE admin/deleteHint - delete hint by admin */
+//   .delete(validate(adminParams.deleteHint), admin.deleteHint)
 
-router
-  .route('/listHints/:questionId')
-  /** authorize admin user */
-  .all(authorizeAdmin)
-  /** GET admin/listHints - list hint by admin */
-  .get(admin.listHints)
+// router
+//   .route('/listHints/:questionId')
+//   /** authorize admin user */
+//   .all(authorizeAdmin)
+//   /** GET admin/listHints - list hint by admin */
+//   .get(admin.listHints)
 
 router
   .route('/updateUser/:userId')

@@ -1,35 +1,35 @@
 import mongoose, { Schema } from 'mongoose';
 
-const promptSchema = new Schema(
-  {
-    type: {
-      type: String,
-      enum: ['text', 'image', 'audio']
-    },
-    value: {
-      type: String
-    }
-  }
-)
+// const promptSchema = new Schema(
+//   {
+//     type: {
+//       type: String,
+//       enum: ['text', 'image', 'audio']
+//     },
+//     value: {
+//       type: String
+//     }
+//   }
+// )
 
 const optionSchema = new Schema(
   {
     option: {
       type: String
     },
-    prompt: [promptSchema],
-    imageName: {
-      type: String
-    },
+    // prompt: [promptSchema],
+    // imageName: {
+    //   type: String
+    // },
     correctAnswer: {
       type: Boolean
     },
-    audioName: {
-      type: String
-    },
-    matchOption: {
-      type: String
-    }
+    // audioName: {
+    //   type: String
+    // },
+    // matchOption: {
+    //   type: String
+    // }
   }
 )
 
@@ -41,9 +41,9 @@ const questionSchema = new Schema(
     image: {
       type: String,
     },
-    audio: {
-      type: String,
-    },
+    // audio: {
+    //   type: String,
+    // },
     answer: [{
       type: String,
     }],
@@ -58,17 +58,17 @@ const questionSchema = new Schema(
     questionTitle: {
       type: String
     },
-    composerName: {
-      type: String
-    },
+    // composerName: {
+    //   type: String
+    // },
     topicId: {
       type: mongoose.Types.ObjectId,
       ref: 'topics'
     },
-    hint: {
-      type: Boolean,
-      default: false
-    }
+    // hint: {
+    //   type: Boolean,
+    //   default: false
+    // }
   },
   { collection: 'question'}
 )

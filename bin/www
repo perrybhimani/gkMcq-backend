@@ -14,13 +14,14 @@ export const salt = config.salt;
 export const adminName = process.env.ADMIN_NAME || config.adminName;
 export const adminEmail = process.env.ADMIN_EMAIL || config.adminEmail;
 export const adminPassword = process.env.ADMIN_PASSWORD || config.adminPassword;
+export const applicationUrl = process.env.APPLICATION_URL || config.applicationUrl;
 
-// const accessKeyId = process.env.AWS_ACCESS_KEY || config.accessKeyId;
-// const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY || config.secretAccessKey;
-// const awsRegion = process.env.AWS_REGION || config.awsRegion;
-// export const bucketName = process.env.BUCKET_NAME || config.bucketName;
-// export const awsUrl = process.env.AWS_URL || config.awsUrl;
-// export const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region: awsRegion });
+const accessKeyId = process.env.AWS_ACCESS_KEY || config.accessKeyId;
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY || config.secretAccessKey;
+const awsRegion = process.env.AWS_REGION || config.awsRegion;
+export const bucketName = process.env.BUCKET_NAME || config.bucketName;
+export const awsUrl = process.env.AWS_URL || config.awsUrl;
+export const s3 = new AWS.S3({ accessKeyId, secretAccessKey, region: awsRegion });
 
 mongoose
   .connect(dbURL, {

@@ -68,47 +68,54 @@ router
   /** GET user/getLeaderBoardData - get leaderboard data by user */
   .get(user.getLeaderBoardData)
 
-router
-  .route('/getHintByQuestion/:questionId')
-  /** authorize user */
-  .all(authorizeUser)
-  /** GET user/getHintByQuestion/:questionId - get hint by question id by user */
-  .get(user.getHintByQuestion)
+// router
+//   .route('/getHintByQuestion/:questionId')
+//   /** authorize user */
+//   .all(authorizeUser)
+//   /** GET user/getHintByQuestion/:questionId - get hint by question id by user */
+//   .get(user.getHintByQuestion)
 
-router
-  .route('/createNotification')
-  /** authorize user */
-  .all(authorizeUser)
-  /** POST user/createNotification - create notification */
-  .post(user.createNotification)
+// router
+//   .route('/createNotification')
+//   /** authorize user */
+//   .all(authorizeUser)
+//   /** POST user/createNotification - create notification */
+//   .post(user.createNotification)
 
-router
-  .route('/listNotification')
-  /** authorize user */
-  .all(authorizeUser)
-  /** GET user/listNotification - list notification */
-  .get(user.listNotification)
+// router
+//   .route('/listNotification')
+//   /** authorize user */
+//   .all(authorizeUser)
+//   /** GET user/listNotification - list notification */
+//   .get(user.listNotification)
 
-router
-  .route('/deleteNotification/:notiId')
-  /** authorize user */
-  .all(authorizeUser)
-  /** DELETE user/deleteNotification - delete notification by user */
-  .delete(validate(userParams.deleteNotification), user.deleteNotification)
+// router
+//   .route('/deleteNotification/:notiId')
+//   /** authorize user */
+//   .all(authorizeUser)
+//   /** DELETE user/deleteNotification - delete notification by user */
+//   .delete(validate(userParams.deleteNotification), user.deleteNotification)
 
-router
-  .route('/saveFcmToken')
-  /** POST user/saveFcmToken - save fcm token by user */
-  .post(user.saveFcmToken)
+// router
+//   .route('/saveFcmToken')
+//   /** POST user/saveFcmToken - save fcm token by user */
+//   .post(user.saveFcmToken)
 
-router
-  .route('/getDiscussions')
-  /**GET user/getComments - get comment for particular question */
-  .get(validate(userParams.getDiscussions), user.getDiscussions)
+// router
+//   .route('/getDiscussions')
+//   /**GET user/getComments - get comment for particular question */
+//   .get(validate(userParams.getDiscussions), user.getDiscussions)
 
 router
   .route('/getQuestionList')
   /**GET user/getQuestionList - get question list by user */
   .get(validate(user.getQuestionList), user.getQuestionList)
+
+router
+  .route('/getLevelList')
+  /** authorize user */
+  .all(authorizeUser)
+  /** GET user/getLevelList - get level list by user */
+  .get(user.getLevelList)
 
 module.exports = router;

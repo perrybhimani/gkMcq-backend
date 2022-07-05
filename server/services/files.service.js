@@ -61,7 +61,7 @@ S3UploadService.fileUpload = async (req, res, next) => {
         let s3Response = await s3.upload(params).promise();
 
         const attach = {
-          path: `${awsUrl}${s3Response.Key}`,
+          path: `${awsUrl}/${s3Response.Key}`,
           filename: filename,
           type: fileType,
           s3Key: s3Response.key,
@@ -76,6 +76,7 @@ S3UploadService.fileUpload = async (req, res, next) => {
       return next();
     }
   } catch (err) {
+    console.log(err)
     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
   }
 };

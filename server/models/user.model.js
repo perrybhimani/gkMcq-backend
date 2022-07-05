@@ -44,18 +44,18 @@ const userSchema = new Schema(
       type: String,
       enum: ['admin', 'user']
     },
-    fcmToken: {
-      type: String
-    },
-    notificationToken: [
-      {
-        type: String
-      }
-    ],
-    pauseNotification: {
-      type: Boolean,
-      default: false
-    },
+    // fcmToken: {
+    //   type: String
+    // },
+    // notificationToken: [
+    //   {
+    //     type: String
+    //   }
+    // ],
+    // pauseNotification: {
+    //   type: Boolean,
+    //   default: false
+    // },
     userProgress: [progressSchema]
   }
 )

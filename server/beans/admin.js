@@ -3,8 +3,8 @@ import APIError from '../helpers/APIError';
 import user from '../models/user.model';
 import topic from '../models/topic.model';
 import question from '../models/question.model';
-import discuss from '../models/feedback.model';
-import hint from '../models/hint.model';
+// import discuss from '../models/feedback.model';
+// import hint from '../models/hint.model';
 import S3UploadService from '../services/files.service';
 import submittedQues from '../models/submitQuestions.model';
 
@@ -268,8 +268,8 @@ async function deleteQuestion(req, res, next) {
     if(findQues.image) await S3UploadService.deleteFile(findQues.image);
     if(findQues.audio) await S3UploadService.deleteFile(findQues.audio);
 
-    await hint.deleteOne({ questionId: _id });
-    await discuss.deleteMany({ questionId: _id });
+    // await hint.deleteOne({ questionId: _id });
+    // await discuss.deleteMany({ questionId: _id });
     await submittedQues.deleteMany({ questionId: _id });
 
     next('question deleted successfully!')
@@ -293,92 +293,92 @@ async function getQuestionById(req, res, next) {
 }
 
 //delete feedback by admin
-async function deleteFeedback(req, res, next) {
-  try {
-    let _id = req.params.feedbackId;
+// async function deleteFeedback(req, res, next) {
+//   try {
+//     let _id = req.params.feedbackId;
 
-    let findFeedback = await discuss.findOne({ _id });
-    if(!findFeedback) return next(new APIError('Invalid discussion Id!', httpStatus.BAD_REQUEST, true));
+//     let findFeedback = await discuss.findOne({ _id });
+//     if(!findFeedback) return next(new APIError('Invalid discussion Id!', httpStatus.BAD_REQUEST, true));
 
-    await discuss.deleteOne({ _id });
+//     await discuss.deleteOne({ _id });
 
-    next('feedback deleted successfully!');
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next('feedback deleted successfully!');
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //create hint by admin
-async function createHint(req, res, next) {
-  try {
-    let { hintInfo, questionId } = req.body;
+// async function createHint(req, res, next) {
+//   try {
+//     let { hintInfo, questionId } = req.body;
 
-    let findHint = await hint.findOne({ questionId });
-    if(findHint) return next(new APIError('hint already present', httpStatus.BAD_REQUEST, true));
+//     let findHint = await hint.findOne({ questionId });
+//     if(findHint) return next(new APIError('hint already present', httpStatus.BAD_REQUEST, true));
 
-    await hint.create({
-      hintInfo,
-      questionId      
-    })
+//     await hint.create({
+//       hintInfo,
+//       questionId      
+//     })
     
-    await question.updateOne({ _id: questionId }, {hint: true});
+//     await question.updateOne({ _id: questionId }, {hint: true});
 
-    next('hint created successfully!')
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next('hint created successfully!')
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //update hint by admin
-async function updateHint(req, res, next) {
-  try {
-    let { hintInfo, questionId } = req.body;
-    let _id = req.params.hintId;
+// async function updateHint(req, res, next) {
+//   try {
+//     let { hintInfo, questionId } = req.body;
+//     let _id = req.params.hintId;
 
-    let findHint = await hint.findOne({ _id });
-    if(!findHint) return next(new APIError('Invalid hint Id!', httpStatus.BAD_REQUEST, true))
+//     let findHint = await hint.findOne({ _id });
+//     if(!findHint) return next(new APIError('Invalid hint Id!', httpStatus.BAD_REQUEST, true))
 
-    let updateValue = {};
+//     let updateValue = {};
 
-    if(hintInfo) updateValue.hintInfo = hintInfo;
-    if(questionId) updateValue.questionId = questionId;
+//     if(hintInfo) updateValue.hintInfo = hintInfo;
+//     if(questionId) updateValue.questionId = questionId;
 
-    await hint.updateOne({ _id }, updateValue);
+//     await hint.updateOne({ _id }, updateValue);
 
-    next('hint successfully updated!')
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next('hint successfully updated!')
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //delete hint by admin
-async function deleteHint(req, res, next) {
-  try {
-    let _id = req.params.hintId;
+// async function deleteHint(req, res, next) {
+//   try {
+//     let _id = req.params.hintId;
 
-    let findHint = await hint.findOne({ _id });
-    if(!findHint) return next(new APIError('Invalid hint id!', httpStatus.BAD_REQUEST, true));
+//     let findHint = await hint.findOne({ _id });
+//     if(!findHint) return next(new APIError('Invalid hint id!', httpStatus.BAD_REQUEST, true));
 
-    await hint.deleteOne({ _id });
-    await question.updateOne({ _id: findHint.questionId }, {hint: false});
+//     await hint.deleteOne({ _id });
+//     await question.updateOne({ _id: findHint.questionId }, {hint: false});
 
-    next('hint successfully deleted!')
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+//     next('hint successfully deleted!')
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //list hint by admin
-async function listHints(req, res, next) {
-  try {
-    let questionId = req.params.questionId
-    let findHint = await hint.findOne({ questionId });
-    if(!findHint) return next({});
-    next(findHint)
-  } catch (err) {
-    return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
-  }
-}
+// async function listHints(req, res, next) {
+//   try {
+//     let questionId = req.params.questionId
+//     let findHint = await hint.findOne({ questionId });
+//     if(!findHint) return next({});
+//     next(findHint)
+//   } catch (err) {
+//     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
+//   }
+// }
 
 //uploadFiles
 async function uploadFile(req, res, next) {
@@ -387,6 +387,7 @@ async function uploadFile(req, res, next) {
 
     next(file)
   } catch (err) {
+    console.log(err)
     return next(new APIError(err.message, httpStatus.INTERNAL_SERVER_ERROR, true))
   }
 }
@@ -418,11 +419,11 @@ module.exports = {
   updateQuestion,
   deleteQuestion,
   getQuestionById,
-  deleteFeedback,
-  createHint,
-  updateHint,
-  deleteHint,
-  listHints,
+  // deleteFeedback,
+  // createHint,
+  // updateHint,
+  // deleteHint,
+  // listHints,
   uploadFile,
   deleteFile
 }
