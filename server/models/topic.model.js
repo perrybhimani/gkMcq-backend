@@ -31,7 +31,7 @@ const topicSchema = new Schema(
     },
     section: {
       type: String,
-      enum: ['Kids', 'Adult']
+      enum: ['Kids', 'Adults']
     },
     position: {
       type: String,
