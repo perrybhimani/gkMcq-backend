@@ -9,9 +9,9 @@ async function adminLogin(req, res, next) {
   try {
     let { email, password } = req.body;
     email = email.toLowerCase();
-
+    console.log("email", email, password)
     let findUser = await user.findOne({ email });
-
+    console.log("findUser", findUser)
     if(findUser && findUser.role === 'admin') {
       const matchPass = await findUser.matchPassword(password);
       if(!matchPass) return next(new APIError("Incorrect Password!", httpStatus.BAD_REQUEST, true));
@@ -21,7 +21,7 @@ async function adminLogin(req, res, next) {
       await user.updateOne({ _id: findUser._id }, { $push: { activeSessions: { $each: [token], $slice: -5 } }});
 
       return next({ name: findUser.name.split(' ')[0], token });
-    }else {
+    } else {
       return next(new APIError("You are not an admin user!", httpStatus.BAD_REQUEST, true));
     }
   } catch (err) {
