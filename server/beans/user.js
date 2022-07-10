@@ -83,6 +83,8 @@ async function submitQuestion(req, res, next) {
 //get progress api by user
 async function getProgress(req, res, next) {
   try {
+    let { section } = req.query;
+
     let progress = await user.aggregate([
       { $match: { _id: req.user._id }},
       { $project: { userProgress: 1 }},
@@ -92,21 +94,21 @@ async function getProgress(req, res, next) {
         $project: {
           userProgress: {
             progress: 1, topicId: 1, topicName: { $arrayElemAt: ["$topic.name", 0] }, topicImage: { $arrayElemAt: ["$topic.image", 0] },
-            topicLevelName: { $arrayElemAt: ["$topic.levelName", 0] }, topicLevel: { $arrayElemAt: ["$topic.level", 0] }, topicRowNo: { $arrayElemAt: ["$topic.rowNo", 0] },
-            topicPosition: { $arrayElemAt: ["$topic.position", 0] }, totalQuestion: { $arrayElemAt: ["$topic.totalQuestion", 0] }
+            topicLevel: { $arrayElemAt: ["$topic.level", 0] }, topicRowNo: { $arrayElemAt: ["$topic.rowNo", 0] },
+            topicPosition: { $arrayElemAt: ["$topic.position", 0] }, totalQuestion: { $arrayElemAt: ["$topic.totalQuestion", 0] }, topicSection: { $arrayElemAt: ["$topic.section", 0] },
           }
         }
       },
+      { $match: { 'userProgress.topicSection': { $eq: section}}},
       {
         $group: {
           _id: { topicLevel: '$userProgress.topicLevel', topicRowNo: '$userProgress.topicRowNo' }, userProgress: { $push: '$userProgress' },
-          topicLevelName: { $max: "$userProgress.topicLevelName" }
         }
       },
-      { $project: { _id: 0, topicLevel: '$_id.topicLevel', topicRowNo: '$_id.topicRowNo', userProgress: '$userProgress', topicLevelName: '$topicLevelName' }},
+      { $project: { _id: 0, topicLevel: '$_id.topicLevel', topicRowNo: '$_id.topicRowNo', userProgress: '$userProgress' }},
       { $sort: { topicRowNo: 1 }},
-      { $group: { _id: { topicLevel: '$topicLevel' }, topicLevelName: { $max: "$topicLevelName" }, userProgress: { $push: '$userProgress' }}},
-      { $project: { _id: 0, topicLevel: '$_id.topicLevel', topicLevelName: '$topicLevelName', userProgress: '$userProgress' }},
+      { $group: { _id: { topicLevel: '$topicLevel' }, userProgress: { $push: '$userProgress' }}},
+      { $project: { _id: 0, topicLevel: '$_id.topicLevel', userProgress: '$userProgress' }},
       { $sort: { topicLevel: 1 }}
     ])
 

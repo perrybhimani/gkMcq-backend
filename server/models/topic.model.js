@@ -23,9 +23,6 @@ const topicSchema = new Schema(
     level: {
       type: Number,
     },
-    levelName: {
-      type: String
-    },
     rowNo: {
       type: Number
     },

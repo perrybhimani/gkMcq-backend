@@ -68,7 +68,7 @@ async function updateUserByAdmin(req, res, next) {
 //create topic by admin according to level
 async function createTopic(req, res, next) {
   try {
-    let { name, image, level, levelName, rowNo, position, prompt, section } = req.body;
+    let { name, image, level, rowNo, position, prompt, section } = req.body;
 
     let findTopic = await topic.findOne({ name, level });
     if(findTopic) return next(new APIError('the topic is already present in respective level', httpStatus.BAD_REQUEST, true));
@@ -80,7 +80,6 @@ async function createTopic(req, res, next) {
       name,
       image,
       level,
-      levelName,
       rowNo,
       position,
       prompt,
@@ -111,7 +110,7 @@ async function listTopics(req, res, next) {
 //update topic by admin 
 async function updateTopic(req, res, next) {
   try {
-    let { name, image, level, levelName, rowNo, position, prompt, section } = req.body;
+    let { name, image, level, rowNo, position, prompt, section } = req.body;
     let _id = req.params.topicId;
 
     let findTopic = await topic.findOne({ _id });
@@ -127,7 +126,6 @@ async function updateTopic(req, res, next) {
     if(name) updateValue.name = name;
     if(image) updateValue.image = image;
     if(level) updateValue.level = level;
-    if(levelName) updateValue.levelName = levelName;
     if(rowNo) updateValue.rowNo = rowNo;
     if(position) updateValue.position = position;
     if(prompt) updateValue.prompt = prompt;
