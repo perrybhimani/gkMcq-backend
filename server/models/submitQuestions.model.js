@@ -14,9 +14,9 @@ const submitQuestions = new Schema(
       type: mongoose.Types.ObjectId,
       ref: 'user'
     },
-    submittedAnswer: {
+    submittedAnswer: [{
       type: String
-    },
+    }],
     submitDate: {
       type: Date
     }

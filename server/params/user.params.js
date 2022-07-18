@@ -35,7 +35,7 @@ const userParams = {
     body: {
       topicId: Joi.string().required(),
       questionId: Joi.string().required(),
-      submittedAnswer: Joi.string().required(),
+      submittedAnswer: Joi.array().items(Joi.string()).required(),
       submitDate: Joi.string().required()
     }
   },
